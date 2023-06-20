@@ -1,6 +1,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const jest = require('jest');
+const {generateSVG} = require('./lib/generateSVG');
+const {generateShape} = require('./lib/generateShape');
 
 const prompt = inquirer.createPromptModule();
 
@@ -18,7 +20,7 @@ prompt([
     {
      type: 'list',   
      message: 'Choose a shape.',
-     choices: ['circle', 'triangle', 'square'],
+     choices: ['Circle', 'Triangle', 'Square'],
      name: 'logoShape',
     },
     {
@@ -26,12 +28,11 @@ prompt([
      message: 'Choose the shape color (color keyword OR a hexadecimal number).',
      name: 'shapeColor',
     },
-]).then((answers) => {
-    // if (answers.text.length > 3) {
-    //     console.log("No more than 3 characters, please.");
-    //     promptUser();
-    // } else {
-    //     writeToFile('logo.svg', answers);
-    // }
-    console.table(answers);
+]).then((data) => {
+    const svgPath = ("logo.svg");
+    const finishedLogo = generateShape(data);
+
+    fs.writeFile(svgPath, generateSVG(finishedLogo), (err) =>
+        err ? console.error(err) : console.log("Completed logo.svg")
+    );
 });
