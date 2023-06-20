@@ -8,7 +8,7 @@ prompt([
     {
      type: 'input',
      message: 'Enter logo characters (up to three characters).',
-     name:'characters',
+     name:'logoCharacters',
     },
     {
      type: 'input',
@@ -19,7 +19,7 @@ prompt([
      type: 'list',   
      message: 'Choose a shape.',
      choices: ['circle', 'triangle', 'square'],
-     name: 'shape',
+     name: 'logoShape',
     },
     {
      type: 'input',
@@ -27,11 +27,11 @@ prompt([
      name: 'shapeColor',
     },
 ]).then((answers) => {
-    if (answers.text.length > 3) {
-        console.log("No more than 3 characters, please.");
-        promptUser();
-    } else {
-        writeToFile('logo.svg', answers);
-    }
+    // if (answers.text.length > 3) {
+    //     console.log("No more than 3 characters, please.");
+    //     promptUser();
+    // } else {
+    //     writeToFile('logo.svg', answers);
+    // }
     console.table(answers);
 });
